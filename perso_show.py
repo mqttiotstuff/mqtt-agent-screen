@@ -1,3 +1,7 @@
+
+## test module for displaying nice characters
+## on the screen
+
 from PIL import Image
 im = Image.open("8x8perso.gif")
 

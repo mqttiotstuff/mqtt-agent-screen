@@ -1,12 +1,11 @@
 
 #
-# MQTT agent to manage a LED screen
+# MQTT agent to manage a LED 8x8 screen
 #
+# this is using the Lua middleware from mqttiotstuff repository, 
 #
+# see 
 #
-#
-
-
 
 import paho.mqtt.client as mqtt
 import random
@@ -21,8 +20,13 @@ import unicodedata
 
 import perso_show
 
-config = RawConfigParser()
+# global constants
 
+PERSO_TOPIC="home/agents/screen/perso"
+TEST_TOPIC="home/agents/screen/test"
+
+# config passwords and connexions are parametrize in a config in the ~/ directory
+config = RawConfigParser()
 
 def get_config_item(section, name, default):
     """
@@ -34,8 +38,6 @@ def get_config_item(section, name, default):
         value = default
     return value
 
-PERSO_TOPIC="home/agents/screen/perso"
-TEST_TOPIC="home/agents/screen/test"
 
 # The callback for when the client receives a CONNACK response from the server.
 def on_connect(client, userdata, flags, rc):
@@ -93,6 +95,8 @@ conffile = os.path.expanduser('~/.mqttagents.conf')
 if not os.path.exists(conffile):
     raise Exception("config file " + conffile + " not found")
 
+
+# read config and launch
 config.read(conffile)
 
 

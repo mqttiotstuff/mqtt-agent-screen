@@ -1,4 +1,4 @@
-
+# this module handle a scrolling on a 8x8 led screen
 import font
 import time
 
@@ -52,7 +52,6 @@ def interpolateColor(color,factor):
     bmax = ord(color[2])
     return chr(int(rmax * factor * factor)) + chr(int(gmax * factor * factor)) + chr(int(bmax * factor * factor )) 
 
-
 def fading(client, topic,  char, color , r = 1):
     c = font.printChar(char) 
     fadingBuffer(client, topic, c, color, r)
@@ -64,7 +63,6 @@ def fadingBuffer(client, topic,buffer, color , r = 1):
         b = toLED(buffer, interpolateColor(color, i * 1.0  / 10.0))        
         client.publish(topic, b)
         time.sleep(0.05)
-
 
 def fadinfadout(client, topic,  char, color ):
     fadinfadoutBuffer(client, topic, font.printChar(char), color);
